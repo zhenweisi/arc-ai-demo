@@ -1,16 +1,45 @@
-# React + Vite
+# Arc AI Demo
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An AI chat demo built on **Arc Network**.  
+Deposit 2 USDC to start chatting with AI (supports Chinese).
 
-Currently, two official plugins are available:
+## ✨ Key Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Connect wallet and deposit 2 USDC with one click
+- Each wallet can only join once (anti-abuse protection)
+- Intelligent AI conversation (supports Chinese)
+- Quick transfer command: `send 1.5 usdc to 0x...`
+- Real-time credit balance display
 
-## React Compiler
+## 🚀 How to Run Locally
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+# 1. Clone the project
+git clone https://github.com/zhenweisi/arc-ai-demo.git
 
-## Expanding the ESLint configuration
+# 2. Enter the folder
+cd arc-ai-demo
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+# 3. Install dependencies
+npm install
+
+# 4. Start the development server
+npm run dev
+```
+
+## After successful startup, open your browser and visit
+http://localhost:5173
+
+## Tech Stack
+
+
+React + Vite
+RainbowKit + Wagmi (Wallet Connection)
+Arc Network Testnet
+
+## Related Project
+
+Backend Repository: https://github.com/zhenweisi/arc-ai-backend
+
+Made with ❤  using Arc Network
+
