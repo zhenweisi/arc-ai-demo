@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 import {
@@ -6,6 +5,8 @@ import {
   useSendTransaction,
 } from 'wagmi'
 import { parseEther } from 'viem'
+
+const API_BASE = '/api';   // Vercel 反向代理地址（重要！）
 
 export default function App() {
 
@@ -23,10 +24,11 @@ export default function App() {
 
   const hasJoinedDemo = credits > 0 || remainingMessages < 5
 
+  // Load Credits
   const loadCredits = async () => {
     if (!wallet) return
     try {
-      const res = await fetch(`http://34.22.102.252:3001/credits/${wallet}`)
+      const res = await fetch(`${API_BASE}/credits/${wallet}`)
       const data = await res.json()
       setCredits(data.credits || 0)
       setRemainingMessages(data.remainingMessages || 0)
@@ -43,14 +45,16 @@ export default function App() {
     return () => clearInterval(timer)
   }, [wallet])
 
+  // Load chat history
   useEffect(() => {
     if (!wallet) return
-    fetch(`http://34.22.102.252:3001/messages/${wallet}`)
+    fetch(`${API_BASE}/messages/${wallet}`)
       .then(res => res.json())
       .then(data => data.success && setMessages(data.messages || []))
       .catch(() => {})
   }, [wallet])
 
+  // Buy Credits
   const buyCredits = async () => {
     if (!wallet) return alert('Please connect your wallet first')
     if (hasJoinedDemo) return alert('Each wallet can only join once')
@@ -70,6 +74,7 @@ export default function App() {
     }
   }
 
+  // Send Message
   const sendMessage = async () => {
     if (!wallet) {
       setMessages(prev => [...prev, { role: 'assistant', content: 'Please connect your wallet first' }])
@@ -119,7 +124,7 @@ export default function App() {
     setLoading(true)
 
     try {
-      const res = await fetch('http://34.22.102.252:3001/chat', {
+      const res = await fetch(`${API_BASE}/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ wallet, message: userInput }),
@@ -146,17 +151,13 @@ export default function App() {
       {/* Top Bar */}
       <div className="border-b border-zinc-800 p-4 flex justify-between items-center bg-zinc-950">
         <div className="flex items-center gap-5">
-          {/* Arc Logo */}
           <img 
             src="/arc-logo.png" 
             alt="Arc Logo" 
             className="w-12 h-12 object-contain"
           />
-          
           <div className="font-bold text-3xl tracking-tighter">
             Arc Echo AI
-
-
           </div>
         </div>
 
