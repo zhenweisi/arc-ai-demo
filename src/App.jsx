@@ -26,7 +26,7 @@ export default function App() {
   const loadCredits = async () => {
     if (!wallet) return
     try {
-      const res = await fetch(`http://localhost:3001/credits/${wallet}`)
+      const res = await fetch(`http://34.22.102.252:3001/credits/${wallet}`)
       const data = await res.json()
       setCredits(data.credits || 0)
       setRemainingMessages(data.remainingMessages || 0)
@@ -45,7 +45,7 @@ export default function App() {
 
   useEffect(() => {
     if (!wallet) return
-    fetch(`http://localhost:3001/messages/${wallet}`)
+    fetch(`http://34.22.102.252:3001/messages/${wallet}`)
       .then(res => res.json())
       .then(data => data.success && setMessages(data.messages || []))
       .catch(() => {})
@@ -119,7 +119,7 @@ export default function App() {
     setLoading(true)
 
     try {
-      const res = await fetch('http://localhost:3001/chat', {
+      const res = await fetch('http://34.22.102.252:3001/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ wallet, message: userInput }),
